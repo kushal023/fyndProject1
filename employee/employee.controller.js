@@ -63,24 +63,6 @@ const store=(req, res, next)=>{
     })
 }
 
-//Save Data
-  
-let dataToFile = {
-    requestName: request.name || request.url,
-    fileExtension: 'json',
-    responseData: pm.response.text()
-};
-pm.sendRequest({
-    url: 'http://localhost:3000/employee/store',
-    method: 'POST',
-    header: 'Content-Type:application/json',
-    body: {
-        mode: 'raw',
-        raw: JSON.stringify(dataToFile)
-    }
-}, function(err, res) {
-    console.log(res);
-});
 //update employee by their employee ID
 
 const update=(req, res, next)=>{
