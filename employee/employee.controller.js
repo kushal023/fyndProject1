@@ -16,7 +16,6 @@ const index=(req, res, next)=>{
     })
 }
 
-
 //Show Single employee
 const show=(req, res, next)=>{
     let employeeID=req.body.employeeID
@@ -27,8 +26,8 @@ const show=(req, res, next)=>{
         })
     })
     .catch(error=>{
-        res.json({
-            message:"An Error Occured!"
+        res.status(404).json({
+            message:`Employee with id: ${req.body.employeeID} not found`
         })
     })
 }
@@ -52,7 +51,7 @@ const store=(req, res, next)=>{
     }
     employee.save()
     .then(response=>{
-        res.json({
+        res.status(200).json({
             message:"Employee Added Successfully!"
         })
     })
@@ -74,20 +73,25 @@ const update=(req, res, next)=>{
         email:req.body.email,
         phone:req.body.phone,
         age:req.body.age,
-        salary:req.body.salary,
-        image:req.body.image
+        salary:req.body.salary
+        
 
     }
+    if(req.file){
+        updatedData.image=req.file.path
+    }
+   
+   
     //Mongoose query for update data
     Employee.findByIdAndUpdate(employeeID, {$set:updatedData})
     .then(()=>{
-        res.json({
+        res.status(200).json({
             message:"Employee Updated Successfully"
         })
     })
     .catch(error=>{
-        res.json({
-            message:"An Error Occured!"
+        res.status(404).json({
+            message:`Employee with id: ${req.body.employeeID} not found`
         })
     })
 }
@@ -98,7 +102,7 @@ const deleteEmployee=(req, res, next)=>{
     let employeeID=req.body.employeeID
     Employee.findByIdAndRemove(employeeID)
     .then(()=>{
-        res.json({
+        res.status(200).json({
             message:"Employee deleted Successfully!"
         })
     })

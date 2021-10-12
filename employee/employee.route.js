@@ -6,9 +6,9 @@ const upload              =require("./employee.upload")
 const authenticate        =require("../user/user.authenticate")
 
 router.get("/",authenticate,index)
-router.post("/show",show)
+router.get("/show",show)
 router.post("/store",upload.single('image'),store)
-router.post("/update",update)
+router.post("/update",upload.single('image'),update)
 router.post("/deleteEmployee",deleteEmployee)
 
 module.exports=router

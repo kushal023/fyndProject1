@@ -19,12 +19,12 @@ const register=(req,res,next)=>{
             })
             user.save()
             .then(user=>{
-                res.json({
+                res.status(200).json({
                     message:"User Added Successfully!"
                 })
             })
             .catch(error=>{
-                res.json({
+                res.status(400).json({
                     message:"An errror occured"
                 })
             })
@@ -51,13 +51,13 @@ const login=(req, res, next)=>{
                         token:token
                     })
                 }else{
-                    res.status(200).json({
+                    res.status(401).json({
                         message:"Password does not matched!"
                     })
                 }
             })
         }else{
-            res.json({
+            res.status(404).json({
                 message:"No User Found!"
             })
         }
