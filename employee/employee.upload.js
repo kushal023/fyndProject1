@@ -1,6 +1,6 @@
 const path=require("path")
 const multer=require("multer")
-const { store } = require("./employee.controller")
+
 
 var storage=multer.diskStorage({
     destination:function(req, file, cb){

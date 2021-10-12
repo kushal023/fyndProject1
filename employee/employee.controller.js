@@ -10,8 +10,8 @@ const index=(req, res, next)=>{
         })
     })
     .catch(error=>{
-        res.json({
-            message:"An error Occured!"
+        res.status(400).json({
+            error
         })
     })
 }
@@ -57,7 +57,7 @@ const store=(req, res, next)=>{
         })
     })
     .catch(error=>{
-        res.json({
+        res.status(400).json({
             message:"An Error Occured!"
         })
     })
@@ -102,10 +102,12 @@ const deleteEmployee=(req, res, next)=>{
             message:"Employee deleted Successfully!"
         })
     })
-    .catch(errror=>{
-        res.json({
-            message:"An Error Occured!"
+    .catch(error=>{
+        res.status(404).json({
+            
+            message:`Employee with id: ${req.body.employeeID} not found`
         })
+        
     })
 
 }
