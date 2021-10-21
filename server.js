@@ -5,15 +5,14 @@ const bodyParser=require("body-parser")
 
 const dotenv=require("dotenv")
 dotenv.config()
-
-const Port=process.env.PORT||3000
+const {DB,PORT}=require("./config")
 
 
 const EmployeeRoute=require("./employee/employee.route")
 const UserRoute=require("./user/user.route")
 
 
-mongoose.connect("mongodb://localhost:27017/fynddb",{useNewUrlParser: true, useUnifiedTopology: true},)
+mongoose.connect(DB,{useNewUrlParser: true, useUnifiedTopology: true},)
 
 const db=mongoose.connection
 
@@ -35,8 +34,8 @@ server.use(bodyParser.json())
 server.use("/uploads", express.static("uploads"))
 
 
-server.listen(Port, (req, res)=>{
-    console.log(`http://localhost:${Port}`)
+server.listen(PORT, (req, res)=>{
+    console.log(`http://localhost:${PORT}`)
 })
 
 server.use("/employee", EmployeeRoute)

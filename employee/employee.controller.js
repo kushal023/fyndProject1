@@ -1,5 +1,4 @@
-const { response } = require("express")
-const Employee=require("./employee.model")
+const Employee=require("./employee.model");
 const fs=require("fs")
 //Show the list of the Employee
 const index=(req, res, next)=>{
@@ -118,4 +117,4 @@ const deleteEmployee=(req, res, next)=>{
 
 module.exports={
     index, show, store, update, deleteEmployee
-}
+};
